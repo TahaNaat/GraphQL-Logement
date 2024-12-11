@@ -3,9 +3,10 @@ package repository;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import entite.Logement;
-
+import entite.Logement.Type;
 import entite.RendezVous;
 
 public class RendezVousRepository {
@@ -70,5 +71,12 @@ public class RendezVousRepository {
 		}
 		return false;
 	}
-	
+
+	public Optional<RendezVous> findById(int id) {
+		return listeRendezVous.stream()
+				.filter(rendezVous -> rendezVous.getId() == id)
+				.findFirst();
+	}
+
+
 }

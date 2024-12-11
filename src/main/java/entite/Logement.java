@@ -1,42 +1,34 @@
 package entite;
 
+import java.util.Objects;
+
 public class Logement {
 	private int reference;
 	private String adresse;
 	private String delegation;
 	private String gouvernorat;
-	private TypeL typeL;
+	private Type type;
 	private String description;
 	private float prix;
-	
-	public enum TypeL {Studio, Appartement, Villa, EtageVilla} ;
 
-	
-	
-	public Logement() {
-		super();
-		// TODO Auto-generated constructor stub
+	public Logement(int reference, String adresse) {
 	}
-	
 
+	public enum Type {Studio, Appartement, Villa, EtageVilla} ;
 
-	public Logement(int reference, String adresse, String deleguation, String gouvernorat, TypeL type, String description, float prix) {
-		super();
+	public Logement() {
+	}
+
+	public Logement(int reference, String adresse, String delegation, String gouvernorat, Type type, String description, float prix) {
 		this.reference = reference;
 		this.adresse = adresse;
-		this.delegation = deleguation;
+		this.delegation = delegation;
 		this.gouvernorat = gouvernorat;
-		this.typeL=type;
+		this.type = type;
 		this.description = description;
 		this.prix = prix;
 	}
 
-	public Logement(int reference, String adresse) {
-		super();
-		this.reference = reference;
-		this.adresse = adresse;
-	}
-	
 	public int getReference() {
 		return reference;
 	}
@@ -45,11 +37,10 @@ public class Logement {
 		this.reference = reference;
 	}
 
-
-
 	public String getAdresse() {
 		return adresse;
 	}
+
 	public void setAdresse(String adresse) {
 		this.adresse = adresse;
 	}
@@ -58,77 +49,52 @@ public class Logement {
 		return delegation;
 	}
 
-	public void setDelegation(String deleguation) {
-		this.delegation = deleguation;
+	public void setDelegation(String delegation) {
+		this.delegation = delegation;
 	}
+
 	public String getGouvernorat() {
 		return gouvernorat;
 	}
+
 	public void setGouvernorat(String gouvernorat) {
 		this.gouvernorat = gouvernorat;
 	}
-	
-	public TypeL getTypeL() {
-		return typeL;
+
+	public Type getType() {
+		return type;
 	}
 
-
-
-	public void setTypeL(TypeL type) {
-		this.typeL = type;
+	public void setType(Type type) {
+		this.type = type;
 	}
-
-
 
 	public String getDescription() {
 		return description;
 	}
+
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
 	public float getPrix() {
 		return prix;
 	}
+
 	public void setPrix(float prix) {
 		this.prix = prix;
 	}
 
-
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (!(o instanceof Logement)) return false;
+		Logement logement = (Logement) o;
+		return getReference() == logement.getReference() && Float.compare(getPrix(), logement.getPrix()) == 0 && Objects.equals(getAdresse(), logement.getAdresse()) && Objects.equals(getDelegation(), logement.getDelegation()) && Objects.equals(getGouvernorat(), logement.getGouvernorat()) && getType() == logement.getType() && Objects.equals(getDescription(), logement.getDescription());
+	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + reference;
-		return result;
+		return Objects.hash(getReference(), getAdresse(), getDelegation(), getGouvernorat(), getType(), getDescription(), getPrix());
 	}
-
-
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Logement other = (Logement) obj;
-		if (reference != other.reference)
-			return false;
-		return true;
-	}
-
-
-
-	@Override
-	public String toString() {
-		return "Logement [reference=" + reference + ", adresse=" + adresse + ", delegation=" + delegation
-				+ ", gouvernorat=" + gouvernorat + ", type=" + typeL + ", description=" + description + ", prix=" + prix
-				+ "]";
-	}
-	
-	
-	
-
 }
